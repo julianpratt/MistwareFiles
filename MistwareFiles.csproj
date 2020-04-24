@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp3.0;netstandard2.0</TargetFrameworks>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+		<Authors>Julian Pratt</Authors>
+		<AssemblyTitle>Mistware.Files</AssemblyTitle>
+		<Description>Library of C# utilities to support file upload / download and storage on Azure or local filestores.</Description>
+		<Summary>Library of C# utilities to support file upload / download and storage on Azure or local filestores.</Summary>
+		<NeutralLanguage>en-GB</NeutralLanguage>
+		<PackageId>Mistware.Files</PackageId>
+		<AssemblyName>MistwareFiles</AssemblyName>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<!-- Build XML documentation for all combinations of target framework x configuration -->
+ 		<DocumentationFile>lib\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<OutputPath>lib</OutputPath>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+		<PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageProjectUrl>https://github.com/julianpratt/MistwareFiles</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="AssemblyInfo.cs" />
+		<Compile Include="src\AzureFileStorage.cs" />
+		<Compile Include="src\Bloblogger.cs" />
+		<Compile Include="src\DirectoryEntry.cs" />
+		<Compile Include="src\FileBootstrap.cs" />
+		<Compile Include="src\IFile.cs" />
+		<Compile Include="src\LocalFileStorage.cs" />
+		<Compile Include="src\Upload\Upload.cs" />
+		<Compile Include="src\Upload\Filters\Antiforgery.cs" />
+		<Compile Include="src\Upload\Filters\ModelBinding.cs" />
+		<Compile Include="src\Upload\Helpers\FileHelpers.cs" />
+		<Compile Include="src\Upload\Helpers\MultipartRequestHelper.cs" />
+	</ItemGroup>
+
+  	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    	<FrameworkReference Include="Microsoft.AspNetCore.App" />
+  	</ItemGroup>
+
+  	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    	<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+  	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.4.1" />
+		<PackageReference Include="Azure.Storage.Files.Shares" Version="12.2.0" />
+		<PackageReference Include="Mistware.Utils" Version="1.0.2" />
+	</ItemGroup>		
+</Project>
